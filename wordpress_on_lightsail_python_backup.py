@@ -79,7 +79,7 @@ now = now.replace(" ","")
 lightsail_instance_snapshot_name = now
 output = "/home/bitnami/backup/" + now + ".tar"
 input = "/opt/bitnami"
-my_bucket='<insert your S3 bucket name>'
+my_bucket='<insert_your_S3_bucket_name>'
 tar_file = output + ".tar.gz"
 dump_file = now
 
