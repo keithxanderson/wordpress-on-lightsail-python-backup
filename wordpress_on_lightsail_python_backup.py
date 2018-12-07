@@ -80,7 +80,7 @@ lightsail_instance_snapshot_name = now
 output = "/home/bitnami/backup/" + now + ".tar"
 input = "/opt/bitnami"
 my_bucket='<insert_your_S3_bucket_name>'
-tar_file = output + ".tar.gz"
+tar_file = output
 dump_file = now
 
 (stop) = stop_wordpress(wordpress_client)
