@@ -11,6 +11,7 @@ def stop_wordpress(client_stop):
 
         print("Stopping Wordpress")
         client_stop = os.system("sudo /opt/bitnami/ctlscript.sh stop")
+	print("Wordpress is stopped")
         return (client_stop)
 
 def start_wordpress(client_start):
@@ -20,6 +21,7 @@ def start_wordpress(client_start):
 
         print("Starting Wordpress")
         client_start = os.system("sudo /opt/bitnami/ctlscript.sh start")
+	print("Wordpress is started")
         return (client_start)
 
 def create_instance_snapshot(client, snapshot_name, instance_name):
@@ -48,10 +50,11 @@ def make_bitnami_tar(output_file, input_dir):
         #Function to tar all of the /opt/bitnami directory into a single tar file
         #with the current date and time stamp as the name.  Bitnami documentation
         #says to tar the entire directory for a backup.
-
-        with tarfile.open(output_file, "w:gz") as tar:
+	
+	print("Dumping /opt/bitnami to tar file")
+        with tarfile.open(output_file, mode='w') as tar:
                 response = tar.add(input_dir, arcname=os.path.basename(input_dir))
-        print("Dumping /opt/bitnami to a tar file")
+        print("Tar file completed")
         return(response)
 
 def upload_to_s3(client,bucket,tar,out):
@@ -60,6 +63,7 @@ def upload_to_s3(client,bucket,tar,out):
 
         print("Uploading tar file to S3")
         response = client.Bucket(bucket).upload_file(tar,out)
+	print("Upload completed")
 
         return(response)
 
@@ -84,7 +88,7 @@ tar_file = output
 dump_file = now
 
 (stop) = stop_wordpress(wordpress_client)
-(snap) = create_instance_snapshot(lightsail_client, lightsail_instance_snapshot_name, lightsail_instance_name)
 (tar) = make_bitnami_tar(output,input)
+(snap) = create_instance_snapshot(lightsail_client, lightsail_instance_snapshot_name, lightsail_instance_name)
 (start) = start_wordpress(wordpress_client)
 (upload) = upload_to_s3(s3_client,my_bucket,tar_file,dump_file)
