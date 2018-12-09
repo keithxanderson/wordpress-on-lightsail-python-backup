@@ -15,6 +15,6 @@ The AWS CLI is not required but is helpful since it sets up the Python environme
 1.  Edit the file and add your AWS Lightsail instance name ('lightsail_instance_name')
 2.  Edit the file and add your S3 bucket name ('my_bucket')
 3.  Configure your Lightsail image with your AWS credentials so that your script will have access to Lightsail and S3.  The steps can be found with the instructions for add the AWS CLI to your instance.  
-4.  This script can co-exist with the AWS CLI but **DO NOT** upgrade pip since that will break the AWS CLI (if you have the AWS CLI installed)
+4.  This script can co-exist with the AWS CLI but **DO NOT** upgrade pip since that will break the AWS CLI (if you have the AWS CLI installed).  You should probably use a virtualenv or run something like 'pip install aws-shell --upgrade --ignore-installed six --user'.  
 5.  Use /usr/bin/python which is version 2.7 when your instance has the AWS CLI installed.  
 6.  To run the file, issue the command 'sudo python wordpress_on_lightsail_python_backup.py'.  
